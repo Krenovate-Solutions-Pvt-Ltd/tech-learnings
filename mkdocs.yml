@@ -1,4 +1,4 @@
-site_name: CFI Documentation
+site_name: Documentation Template
 nav:
   -  Welcome:  'index.md'
 theme:
