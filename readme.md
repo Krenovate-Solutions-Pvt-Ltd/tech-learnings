@@ -11,6 +11,8 @@
     `pip3 install mkdocs-git-revision-date-localized-plugin`
 1. Open terminal where you have cloned your new documentation repository.
 1. Run `mkdocs serve`. This will start building the documentation site which you can see by visiting at `http://127.0.0.1:8000/`
+1. When you are have created documentation and would want to deploy. Just use `mkdocs gh-deploy`. This will deploy the website to github pages.
+To get the link of the site you can either look at the response of your above command or go to the setting of your repository and scroll down to the bottom to `GitHub Pages` section to find the link.
 
 
 ### Other Important Links
