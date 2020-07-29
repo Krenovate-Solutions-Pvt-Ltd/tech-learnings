@@ -1,0 +1,45 @@
+site_name: CFI Documentation
+nav:
+  -  Welcome:  'index.md'
+theme:
+  name: material
+  features:
+    - instant
+  font:
+    text: Inter
+    code: Source Code Pro
+  palette:
+      primary: indigo
+      accent: blue
+
+plugins:
+  - search:
+      prebuild_index: true
+      lang:
+        - en
+  - git-revision-date-localized
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
+  - pymdownx.tilde
