@@ -13,7 +13,9 @@
 1. Run `mkdocs serve`. This will start building the documentation site which you can see by visiting at `http://127.0.0.1:8000/`
 
 
-### Important Links
+### Other Important Links
 
+1. Github : https://krenovate-solutions-pvt-ltd.github.io/training-manuals/Daily-Apps/GitHub/
+1. VSCode : https://krenovate-solutions-pvt-ltd.github.io/training-manuals/Daily-Apps/Visual-Studio-Code/
 1. mkdocs : https://www.mkdocs.org/#installation
-2. material theme : https://squidfunk.github.io/mkdocs-material/getting-started/#extensions
+1. material theme : https://squidfunk.github.io/mkdocs-material/getting-started/#extensions
