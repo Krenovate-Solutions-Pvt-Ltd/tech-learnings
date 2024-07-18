@@ -1,6 +1,9 @@
-site_name: Documentation Template
+site_name: Tech Learnings
 nav:
-  -  Welcome:  'index.md'
+  -  Image Alt Tag:  'image-alt-tag.md'
+  -  Relative URL's:  'relative-urls.md'
+  -  Image Optimization:  'image-optimization.md'
+  -  Custom Post Types v/s ACF Options Page:  'cpt-or-options-page.md'
 theme:
   name: material
   features:

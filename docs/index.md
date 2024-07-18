@@ -1,6 +1,3 @@
-# This is a sample Documentation
+# **Tech Learnings**
 
-If you see this, then you have successfully installed mkdocs setup and run it in your machine.
-
-
-Visit `docs/` directory and start creating an awesome documentation.
+This documentation is based on the some learnings from the first project that is built on Sage 10 with the ReactJs and Tailwind.
