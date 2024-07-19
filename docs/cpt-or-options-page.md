@@ -68,3 +68,15 @@ echo $footer_text;
 ![alt text](image-3.png)
 
 **Please Note:** Creating option page in any way is only available in ACF pro plugin.
+
+## **Comparative Analysis**
+There are some different use cases that will help to decide when to use Custom Post Types(CPTs) or when ACF Option Page:
+
+1. We can use CPTs for content that needs categorization and structured management whereas ACF Option Pages can be used for global settings and content that do not fit the post/page model.
+2. CPTs are ideal for specific content types that require their own archives and single pages. On the other hand, Option pages are best for site-wide settings and content appearing across multiple pages.
+3. CPTs are better for scalable content that may grow over time whereas Option pages are suitable for static or infrequently changed setting.
+4. Analyze how the choice will affect your SEO strategy, focusing on URL structure, meta information, and schema markup. In some cases we may not require the the post urls that are auto generating with each posts and we can disable that by passing the below two arguments to the post creation function:
+```
+    'publicly_queryable'  => false, // Disable single post pages
+    'rewrite'             => false,
+```

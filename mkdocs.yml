@@ -4,6 +4,7 @@ nav:
   -  Relative URL's:  'relative-urls.md'
   -  Image Optimization:  'image-optimization.md'
   -  Custom Post Types v/s ACF Options Page:  'cpt-or-options-page.md'
+  -  ACF Blocks:  'acf-blocks.md'
 theme:
   name: material
   features:
