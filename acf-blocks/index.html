@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#creating-acf-blocks" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -279,6 +284,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ACF Blocks
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -288,6 +304,74 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-acf-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating ACF Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating ACF Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-up-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Set Up Your Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-register-your-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Register Your Block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-the-block-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Create the Block Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-add-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Add Custom Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -311,6 +395,65 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creating-acf-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating ACF Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating ACF Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-up-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Set Up Your Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-register-your-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Register Your Block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-the-block-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Create the Block Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-add-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Add Custom Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -326,7 +469,38 @@
 
   <h1>ACF Blocks</h1>
 
-
+<p>Advanced Custom Fields (ACF) Blocks are a feature of the ACF plugin for WordPress that allows developers to create custom blocks for the Gutenberg editor without needing to dive deep into JavaScript or React. ACF Blocks bridge the gap between WordPress’s modern block editor (Gutenberg) and traditional PHP-based custom fields, enabling developers to create powerful, flexible content editing experiences.</p>
+<p><strong>Blocks can be reused across different pages and posts, ensuring consistency and saving development time.</strong></p>
+<h3 id="creating-acf-blocks">Creating ACF Blocks<a class="headerlink" href="#creating-acf-blocks" title="Permanent link">&para;</a></h3>
+<p>To create ACF Blocks, you’ll need the ACF Pro plugin. Here’s a step-by-step guide to creating your first ACF Block:</p>
+<h4 id="step-1-set-up-your-environment">Step 1: Set Up Your Environment<a class="headerlink" href="#step-1-set-up-your-environment" title="Permanent link">&para;</a></h4>
+<p>Ensure you have the following:
+- A WordPress site.
+- ACF Pro plugin installed and activated.</p>
+<h4 id="step-2-register-your-block">Step 2: Register Your Block<a class="headerlink" href="#step-2-register-your-block" title="Permanent link">&para;</a></h4>
+<p>In your theme’s functions.php file or a custom plugin, use the <code>acf_register_block_type</code> function to register your block.</p>
+<div class="highlight"><pre><span></span><code>if( function_exists(&#39;acf_register_block_type&#39;) ) {
+    acf_register_block_type(array(
+        &#39;name&#39;              =&gt; &#39;example&#39;,
+        &#39;title&#39;             =&gt; __(&#39;Example Block&#39;),
+        &#39;description&#39;       =&gt; __(&#39;A custom example block.&#39;),
+        &#39;render_template&#39;   =&gt; &#39;template-parts/blocks/example/example.php&#39;,
+        &#39;category&#39;          =&gt; &#39;formatting&#39;,
+        &#39;icon&#39;              =&gt; &#39;admin-comments&#39;,
+        &#39;keywords&#39;          =&gt; array( &#39;example&#39;, &#39;custom&#39; ),
+    ));
+}
+</code></pre></div>
+<h4 id="step-3-create-the-block-template">Step 3: Create the Block Template<a class="headerlink" href="#step-3-create-the-block-template" title="Permanent link">&para;</a></h4>
+<p>Create a PHP template file for your block. This template file will be used to render the block’s content. For example, create a file named <code>example.php</code> or <code>example.blade.php</code> in <code>template-parts/blocks/</code>.</p>
+<div class="highlight"><pre><span></span><code>&lt;div class=&quot;example-block&quot;&gt;
+    &lt;h2&gt;&lt;?php the_field(&#39;title&#39;); ?&gt;&lt;/h2&gt;
+    &lt;p&gt;&lt;?php the_field(&#39;description&#39;); ?&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre></div>
+<h4 id="step-4-add-custom-fields">Step 4: Add Custom Fields<a class="headerlink" href="#step-4-add-custom-fields" title="Permanent link">&para;</a></h4>
+<p>Add custom fields to your block using ACF’s user interface. Navigate to Custom Fields -&gt; Add New in the WordPress admin area, create a new field group, and set the location rules to display these fields when the block is equal to your custom block (example).</p>
+<p><img alt="alt text" src="../image-4.png" /></p>
 
 
 
