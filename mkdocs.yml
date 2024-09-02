@@ -5,6 +5,7 @@ nav:
   -  Image Optimization:  'image-optimization.md'
   -  Custom Post Types v/s ACF Options Page:  'cpt-or-options-page.md'
   -  ACF Blocks:  'acf-blocks.md'
+  -  GitHub deployment: 'github-deployment.md'
 theme:
   name: material
   features:
