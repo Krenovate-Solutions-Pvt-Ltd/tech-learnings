@@ -1,0 +1,732 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../acf-blocks/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.26">
+    
+    
+      
+        <title>GitHub deployment - Tech Learnings</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CSource+Code+Pro:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Source Code Pro"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setup-github-action-for-your-theme-in-order-to-deploy-the-new-version-of-your-theme-to-any-host-with-ssh-access" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Tech Learnings" class="md-header__button md-logo" aria-label="Tech Learnings" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Learnings
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitHub deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Tech Learnings" class="md-nav__button md-logo" aria-label="Tech Learnings" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Tech Learnings
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-alt-tag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image Alt Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relative-urls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relative URL's
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Image Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cpt-or-options-page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Custom Post Types v/s ACF Options Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acf-blocks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACF Blocks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    GitHub deployment
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    GitHub deployment
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-github-action-for-your-theme-in-order-to-deploy-the-new-version-of-your-theme-to-any-host-with-ssh-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Github action for your theme in order to deploy the new version of your theme to any host with SSH access.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Github action for your theme in order to deploy the new version of your theme to any host with SSH access.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps Involved
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-setting-up-github-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setting up Github Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setting-up-your-host-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Setting up your host machine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Setting up your host machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-ssh-key-to-the-ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding SSH key to the ssh-agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-secret-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add secret to Github
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-command-to-push-code-to-host-from-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Command to push code to Host from local*
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-github-action-for-your-theme-in-order-to-deploy-the-new-version-of-your-theme-to-any-host-with-ssh-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Github action for your theme in order to deploy the new version of your theme to any host with SSH access.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Github action for your theme in order to deploy the new version of your theme to any host with SSH access.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps Involved
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-setting-up-github-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setting up Github Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setting-up-your-host-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Setting up your host machine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Setting up your host machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-ssh-key-to-the-ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding SSH key to the ssh-agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-secret-to-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add secret to Github
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-command-to-push-code-to-host-from-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Command to push code to Host from local*
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h2 id="setup-github-action-for-your-theme-in-order-to-deploy-the-new-version-of-your-theme-to-any-host-with-ssh-access"><strong>Setup Github action for your theme in order to deploy the new version of your theme to any host with SSH access.</strong><a class="headerlink" href="#setup-github-action-for-your-theme-in-order-to-deploy-the-new-version-of-your-theme-to-any-host-with-ssh-access" title="Permanent link">&para;</a></h2>
+<h3 id="steps-involved">Steps Involved<a class="headerlink" href="#steps-involved" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Setting up Github Repository</li>
+<li>Setting up your host machine</li>
+<li>Command to push code to Host from local</li>
+</ol>
+<h2 id="1-setting-up-github-repository"><strong>1. Setting up Github Repository</strong><a class="headerlink" href="#1-setting-up-github-repository" title="Permanent link">&para;</a></h2>
+<p>We will start by adding actions.</p>
+<ol>
+<li>Click on the "Actions" tab in your repository.</li>
+<li>Click on the button "New Workflow" next. You will find it in the top left section. After this, Click on the button “Skip this and set up a workflow yourself → ”</li>
+<li>You will be taken to a page where which would be at <code>your-repo/.github/workflows/main.yml</code>. Change the name of the file to <code>live.yml</code> as we are creating actions to deploy our code to the live server.</li>
+<li>Copy the code from below and paste it in your <code>live.yml</code> file</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">Deploy</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">live</span>
+
+<span class="nx">on</span><span class="o">:</span>
+<span class="w">  </span><span class="nx">push</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">branches</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">live</span><span class="p">]</span>
+
+<span class="nx">jobs</span><span class="o">:</span>
+<span class="w">  </span><span class="nx">deploy</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">runs</span><span class="o">-</span><span class="nx">on</span><span class="o">:</span><span class="w"> </span><span class="nx">ubuntu</span><span class="o">-</span><span class="nx">latest</span>
+
+<span class="w">    </span><span class="nx">steps</span><span class="o">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">uses</span><span class="o">:</span><span class="w"> </span><span class="nx">actions</span><span class="o">/</span><span class="nx">checkout</span><span class="err">@</span><span class="nx">v2</span>
+
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">uses</span><span class="o">:</span><span class="w"> </span><span class="nx">actions</span><span class="o">/</span><span class="nx">setup</span><span class="o">-</span><span class="nx">node</span><span class="err">@</span><span class="nx">v1</span><span class="mf">.4.4</span>
+<span class="w">        </span><span class="kd">with</span><span class="o">:</span>
+<span class="w">          </span><span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="mf">16.</span><span class="nx">x</span>
+
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">Setup</span><span class="w"> </span><span class="nx">PHP</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="nx">intl</span>
+<span class="w">        </span><span class="nx">uses</span><span class="o">:</span><span class="w"> </span><span class="nx">shivammathur</span><span class="o">/</span><span class="nx">setup</span><span class="o">-</span><span class="nx">php</span><span class="err">@</span><span class="nx">v2</span>
+<span class="w">        </span><span class="kd">with</span><span class="o">:</span>
+<span class="w">          </span><span class="nx">php</span><span class="o">-</span><span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;8.1&quot;</span>
+<span class="w">          </span><span class="nx">extensions</span><span class="o">:</span><span class="w"> </span><span class="nx">intl</span><span class="o">-</span><span class="mf">67.1</span>
+
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">Install</span><span class="w"> </span><span class="nx">dependencies</span>
+<span class="w">        </span><span class="nx">run</span><span class="o">:</span><span class="w"> </span><span class="o">|</span>
+<span class="w">          </span><span class="nx">composer</span><span class="w"> </span><span class="nx">install</span>
+<span class="w">          </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">--</span><span class="nx">ignore</span><span class="o">-</span><span class="nx">engines</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">Build</span>
+<span class="w">        </span><span class="nx">run</span><span class="o">:</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">build</span>
+
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">Sync</span>
+<span class="w">        </span><span class="nx">env</span><span class="o">:</span>
+<span class="w">          </span><span class="nx">dest</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;root@host_ip:/var/www/html/wp-content/themes/ThemeName&quot;</span>
+<span class="w">        </span><span class="nx">run</span><span class="o">:</span><span class="w"> </span><span class="o">|</span>
+<span class="w">          </span><span class="nx">echo</span><span class="w"> </span><span class="s2">&quot;${{secrets.LIVE_DEPLOY_KEY}}&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">deploy_key</span>
+<span class="w">          </span><span class="nx">chmod</span><span class="w"> </span><span class="mf">600</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="nx">deploy_key</span>
+<span class="w">          </span><span class="nx">rsync</span><span class="w"> </span><span class="o">-</span><span class="nx">chav</span><span class="w"> </span><span class="o">--</span><span class="ow">delete</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="o">-</span><span class="nx">e</span><span class="w"> </span><span class="s1">&#39;ssh -i ./deploy_key -o StrictHostKeyChecking=no&#39;</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="o">--</span><span class="nx">exclude</span><span class="w"> </span><span class="o">/</span><span class="nx">deploy_key</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="o">--</span><span class="nx">exclude</span><span class="w"> </span><span class="o">/</span><span class="p">.</span><span class="nx">git</span><span class="o">/</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="o">--</span><span class="nx">exclude</span><span class="w"> </span><span class="o">/</span><span class="p">.</span><span class="nx">github</span><span class="o">/</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="o">--</span><span class="nx">exclude</span><span class="w"> </span><span class="o">/</span><span class="nx">node_modules</span><span class="o">/</span><span class="w"> </span><span class="o">\</span>
+<span class="w">            </span><span class="p">.</span><span class="o">/</span><span class="w"> </span><span class="nx">$</span><span class="p">{{</span><span class="nx">env</span><span class="p">.</span><span class="nx">dest</span><span class="p">}}</span>
+</code></pre></div>
+<ol>
+<li>Inside jobs→deploy→steps→snyc, you will have to change the value of <code>dest</code>. This is what the value of dist will be for you <code>&lt;user&gt;@&lt;host ip&gt;:&lt;path-to-your-theme&gt;</code>. So for example <code>suraj@111.11.111.111:/var/www/html/wp-content/themes/theme-name</code></li>
+<li>After this is done you have to on "<em>Start Commit</em>" button and merge it into your master branch.</li>
+<li>You will have to add a secret <code>LIVE_DEPLOY_KEY</code> which we will revisit after setting up our host.</li>
+</ol>
+<h1 id="2-setting-up-your-host-machine"><strong>2. Setting up your host machine</strong><a class="headerlink" href="#2-setting-up-your-host-machine" title="Permanent link">&para;</a></h1>
+<p><code>ssh</code> into your machine. We will create a SSH key and add it our github repository in order for our give our github repository access to our host machine.</p>
+<p>We do this in the following steps.</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
+</code></pre></div>
+<blockquote>
+<p>Don't forget to change the email ID to yours. This will give you some prompts.
+</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>&gt; Generating public/private rsa key pair.
+&gt; Enter a file in which to save the key (/home/you/.ssh/id_rsa): [Press enter]
+&gt; Enter passphrase (empty for no passphrase): [Type a passphrase]
+&gt; Enter same passphrase again: [Type passphrase again]
+</code></pre></div>
+<p>You have to press enter and skip all of the above. In some cases you may already have an SSH key and you can overwrite it in order to create a fresh one.</p>
+<p>You have now created a new ssh at <code>~/.ssh/id_rsa</code>.</p>
+<h3 id="adding-ssh-key-to-the-ssh-agent">Adding SSH key to the ssh-agent<a class="headerlink" href="#adding-ssh-key-to-the-ssh-agent" title="Permanent link">&para;</a></h3>
+<p>Enter the following command.</p>
+<div class="highlight"><pre><span></span><code>eval $(ssh-agent -s)
+&gt; Agent pid 59566
+ssh-add ~/.ssh/id_rsa
+</code></pre></div>
+<p>Now we need to add our public key <code>id_rsa.pub</code> to the authorized_keys.</p>
+<p>You can do this by.</p>
+<div class="highlight"><pre><span></span><code># Getting inside SSH file
+$ cd ~/.ssh/
+
+# Copying pub key into your clipboard
+$ cat id_rsa.pub
+# This would print the content on the screen which you have to copy
+
+# paste the content inside authorized_keys
+$ nano authorized_keys
+# To save press Ctrl+X -&gt; y -&gt; Press Enter
+
+# Copy the content of public key
+$ cat id_rsa
+# This will paste the content of the public key which you have to copy starting from Start here till the end.
+</code></pre></div>
+<h3 id="add-secret-to-github">Add secret to Github<a class="headerlink" href="#add-secret-to-github" title="Permanent link">&para;</a></h3>
+<p>In your Github repository you go → settings tab → Secrets &amp; Variables → Actions → Click on <code>New repository secret</code> -&gt; Type the name of the secret as <code>LIVE_DEPLOY_KEY</code> -&gt; Paste the content of public key copied above here and hit <code>Add secret</code>.</p>
+<p>We are almost done. We just have to test if everything is working fine or not.</p>
+<h2 id="3-command-to-push-code-to-host-from-local">3. Command to push code to Host from local*<a class="headerlink" href="#3-command-to-push-code-to-host-from-local" title="Permanent link">&para;</a></h2>
+<p>Go to your local development and git push all the changes you want to deploy. When you are satisfied with the changes and you have pushed those in your master branch use this command.</p>
+<div class="highlight"><pre><span></span><code>git push origin main:live
+</code></pre></div>
+<p>This will push all the contents of master branch to production branch.</p>
+<p>Now if you look closely at our <code>live.yml</code> file you can see these lines of code.</p>
+<div class="highlight"><pre><span></span><code>name: Deploy to live
+on:
+  push:
+    branches: [ live ]
+</code></pre></div>
+<p>These lines tells that this action gets triggered when there is a push in the production branch.</p>
+<p>You can look at your progress by going to the <code>Actions</code> tab. You would see an action is running. You can click on deploy to check the status and log of the same.</p>
+<p><strong>[*Note: If you don’t have local code setup, You can manually create a new branch <code>live</code> on github and merge the <code>main</code> branch with <code>live</code> ]</strong></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">September 2, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["instant"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
